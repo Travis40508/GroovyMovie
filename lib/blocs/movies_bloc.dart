@@ -18,6 +18,9 @@ class MoviesBloc extends Bloc {
         .listen((movies) => _moviesSubject.sink.add(movies), onError: (e) => _moviesSubject.sink.addError(e));
   }
 
+  //default constructor
+  MoviesBloc();
+
   MoviesBloc.withMocks({@required MoviesRepository repository}) {
     this.moviesRepository = repository;
   }
