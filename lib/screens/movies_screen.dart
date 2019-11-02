@@ -46,10 +46,8 @@ class _MoviesScreenState extends State<MoviesScreen> {
     return AppBar(
       title: Text(
         _bloc.fetchScreenTitle(movieType: _route?.movieType),
-        style: TextStyle(color: Colors.redAccent),
       ),
       centerTitle: true,
-      backgroundColor: Theme.of(context).appBarTheme.color,
     );
   }
 

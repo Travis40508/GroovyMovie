@@ -8,6 +8,7 @@ import 'package:groovy_movie/utils/strings.dart';
 class MoviesApplication extends StatelessWidget {
 
   final primaryColor = Colors.redAccent;
+  final secondaryColor = Colors.black45;
 
   @override
   Widget build(BuildContext context) {
@@ -28,13 +29,19 @@ class MoviesApplication extends StatelessWidget {
 
       theme: ThemeData(
         primaryColor: primaryColor,
-        accentColor: Colors.black45,
-        backgroundColor: Colors.black45,
+        accentColor: secondaryColor,
+        backgroundColor: secondaryColor,
         appBarTheme: AppBarTheme(
           iconTheme: IconThemeData(
             color: primaryColor
           ),
-          color: Colors.transparent
+          color: Colors.transparent,
+          textTheme: TextTheme(
+            title: TextStyle(
+              color: primaryColor,
+              fontSize: 22.0
+            )
+          ),
         ),
         textTheme: TextTheme(
           caption: TextStyle(
