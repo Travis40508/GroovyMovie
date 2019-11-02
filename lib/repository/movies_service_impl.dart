@@ -5,6 +5,7 @@ import 'package:groovy_movie/repository/movies_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' show Client;
 import 'dart:convert';
+export 'movies_service.dart';
 
 class MoviesServiceImpl implements MoviesService {
 
