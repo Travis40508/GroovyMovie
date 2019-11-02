@@ -28,6 +28,8 @@ dependencies:
   generic_bloc_provider: ^1.0.9
   cached_network_image: ^1.1.2+1
 
+  mockito: ^4.1.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
