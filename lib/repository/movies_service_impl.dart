@@ -21,7 +21,7 @@ class MoviesServiceImpl implements MoviesService {
     final res = await _client.get(url);
     final json = jsonDecode(res.body);
 
-    print('Fetching response from - $url');
+    print('${DateTime.now()} - Fetching response from - $url');
     print('Response from - $url = $json');
 
     return MoviesRes.fromJson(json);
