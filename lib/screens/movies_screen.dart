@@ -3,6 +3,7 @@ import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:groovy_movie/blocs/movies_bloc.dart';
 import 'package:groovy_movie/models/movies_res.dart';
 import 'package:groovy_movie/routes/movie_screen_route.dart';
+import 'package:groovy_movie/widgets/drawer_item.dart';
 import 'package:groovy_movie/widgets/error_widget.dart';
 import 'package:groovy_movie/widgets/movie_card.dart';
 import 'package:groovy_movie/widgets/movies_section_loading_widget.dart';
@@ -44,10 +45,10 @@ class _MoviesScreenState extends State<MoviesScreen> {
 
   Widget buildAppBar() {
     return AppBar(
-      title: Text(
-        _bloc.fetchScreenTitle(movieType: _route?.movieType),
-      ),
-      centerTitle: true,
+      title: Text(_bloc.fetchScreenTitle(movieType: _route?.movieType),), centerTitle: true,
+      actions: <Widget>[
+        IconButton(icon: Icon(Icons.search), onPressed: () => print('Search!'),)
+      ],
     );
   }
 
@@ -79,15 +80,16 @@ class _MoviesScreenState extends State<MoviesScreen> {
   Widget buildDrawer() {
     return Opacity(
       opacity: .8,
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            Text(
-              'hi',
-              style: TextStyle(fontSize: 18.0, color: Colors.white),
-            ),
-            Text('bye')
-          ],
+      child: Drawer(
+        child: Container(
+          color: Theme.of(context).dialogBackgroundColor,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: _bloc.typeToTitleMap.entries.map((section) => DrawerItem(
+              isCurrentItem: _bloc.isCurrentSection(section: _route?.movieType, title: section.value),
+              onClick: () => Navigator.pushReplacementNamed(context, MovieScreenRoute.routeName, arguments: MovieScreenRoute(movieType: section.key)),
+              title: section.value,)).toList()
+          ),
         ),
       ),
     );

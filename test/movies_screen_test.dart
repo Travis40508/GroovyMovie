@@ -74,5 +74,16 @@ void main() {
       expect(moviesBloc.getMovieType(type: MovieTypes.topRatedMovies), MovieTypes.topRatedMovies);
       expect(moviesBloc.getMovieType(type: MovieTypes.nowPlayingMovies), MovieTypes.nowPlayingMovies);
     });
+
+    test('test if current section is selected if null', () {
+      expect(moviesBloc.isCurrentSection(section: null, title: MovieTitles.popularMoviesTitle), true);
+    });
+
+    test('test if current section is selected if not null', () {
+      expect(moviesBloc.isCurrentSection(section: MovieTypes.popularMovies, title: MovieTitles.popularMoviesTitle), true);
+      expect(moviesBloc.isCurrentSection(section: MovieTypes.upcomingMovies, title: MovieTitles.upcomingMoviesTitle), true);
+      expect(moviesBloc.isCurrentSection(section: MovieTypes.topRatedMovies, title: MovieTitles.topRatedMoviesTitle), true);
+      expect(moviesBloc.isCurrentSection(section: MovieTypes.nowPlayingMovies, title: MovieTitles.nowPlayingMoviesTitle), true);
+    });
   });
 }

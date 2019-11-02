@@ -9,6 +9,7 @@ class MoviesApplication extends StatelessWidget {
 
   final primaryColor = Colors.redAccent;
   final secondaryColor = Colors.black45;
+  final drawerColor = Colors.black;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,7 @@ class MoviesApplication extends StatelessWidget {
         primaryColor: primaryColor,
         accentColor: secondaryColor,
         backgroundColor: secondaryColor,
+        dialogBackgroundColor: drawerColor,
         appBarTheme: AppBarTheme(
           iconTheme: IconThemeData(
             color: primaryColor
@@ -47,7 +49,17 @@ class MoviesApplication extends StatelessWidget {
           caption: TextStyle(
             color: primaryColor,
             fontSize: 22.0,
-          )
+          ),
+          subtitle: TextStyle(
+            color: primaryColor,
+            fontSize: 24.0,
+            fontWeight: FontWeight.normal
+          ),
+          title: TextStyle(
+              color: primaryColor,
+              fontSize: 28.0,
+              fontWeight: FontWeight.bold
+          ),
         )
       ),
     );

@@ -11,6 +11,13 @@ class MoviesBloc extends Bloc {
   MoviesRepository moviesRepository = MoviesRepositoryImpl();
   static const _baseMoviePath = 'https://image.tmdb.org/t/p/w500';
 
+  Map<String, String> typeToTitleMap = {
+    MovieTypes.popularMovies: MovieTitles.popularMoviesTitle,
+    MovieTypes.upcomingMovies: MovieTitles.upcomingMoviesTitle,
+    MovieTypes.nowPlayingMovies: MovieTitles.nowPlayingMoviesTitle,
+    MovieTypes.topRatedMovies: MovieTitles.topRatedMoviesTitle,
+  };
+
   final _moviesSubject = PublishSubject<List<Movie>>();
   Observable<List<Movie>> get moviesStream => _moviesSubject.stream;
 
@@ -55,6 +62,10 @@ class MoviesBloc extends Bloc {
 
   String getMovieType({String type}) {
     return type?? MovieTypes.popularMovies;
+  }
+
+  bool isCurrentSection({@required String section, @required String title}) {
+      return typeToTitleMap[section ?? MovieTypes.popularMovies] == title;
   }
 
 }
