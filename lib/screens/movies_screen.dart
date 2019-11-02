@@ -3,6 +3,7 @@ import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:groovy_movie/blocs/movies_bloc.dart';
 import 'package:groovy_movie/models/movies_res.dart';
 import 'package:groovy_movie/routes/movie_screen_route.dart';
+import 'package:groovy_movie/routes/movies_details_route.dart';
 import 'package:groovy_movie/widgets/drawer_item.dart';
 import 'package:groovy_movie/widgets/error_widget.dart';
 import 'package:groovy_movie/widgets/movie_card.dart';
@@ -63,7 +64,9 @@ class _MoviesScreenState extends State<MoviesScreen> {
           itemBuilder: (context, index) {
             Movie _movie = snapshot?.data[index];
 
-            return MovieCard(imagePath: _bloc.fetchImagePath(moviePath: _movie.posterPath),);
+            return MovieCard(
+              imagePath: _bloc.fetchImagePath(moviePath: _movie.posterPath),
+              onClick: () => Navigator.pushNamed(context, MovieDetailsRoute.routeName, arguments: MovieDetailsRoute(movie: _movie)),);
           },
         );
 
@@ -88,7 +91,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
             children: _bloc.typeToTitleMap.entries.map((section) => DrawerItem(
               isCurrentItem: _bloc.isCurrentSection(section: _route?.movieType, title: section.value),
               onClick: () {
-                if (!_bloc.isCurrentSection(section: _route.movieType, title: section.value)) {
+                if (!_bloc.isCurrentSection(section: _route?.movieType, title: section.value)) {
                   Navigator.pushReplacementNamed(
                       context, MovieScreenRoute.routeName,
                       arguments: MovieScreenRoute(movieType: section.key));

@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:groovy_movie/blocs/movies_bloc.dart';
 import 'package:groovy_movie/routes/movie_screen_route.dart';
+import 'package:groovy_movie/routes/movies_details_route.dart';
+import 'package:groovy_movie/screens/movie_details_screen.dart';
 import 'package:groovy_movie/screens/movies_screen.dart';
 import 'package:groovy_movie/utils/strings.dart';
+import 'blocs/movie_details_bloc.dart';
 
 class MoviesApplication extends StatelessWidget {
 
@@ -25,6 +28,11 @@ class MoviesApplication extends StatelessWidget {
         MovieScreenRoute.routeName: (context) => BlocProvider(
           bloc: MoviesBloc(),
           child: MoviesScreen(),
+        ),
+
+        MovieDetailsRoute.routeName: (context) => BlocProvider(
+          bloc: MovieDetailsBloc(),
+          child: MovieDetailsScreen(),
         )
       },
 

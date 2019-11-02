@@ -1,5 +1,4 @@
 import 'package:groovy_movie/models/movies_res.dart';
-import 'package:groovy_movie/repository/movies_cache.dart';
 import 'package:groovy_movie/repository/movies_cache_impl.dart';
 import 'package:groovy_movie/repository/movies_repository.dart';
 import 'package:groovy_movie/repository/movies_service_impl.dart';

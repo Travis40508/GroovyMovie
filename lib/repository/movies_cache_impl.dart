@@ -1,6 +1,7 @@
 
 import 'package:groovy_movie/models/movies_res.dart';
 import 'package:groovy_movie/repository/movies_cache.dart';
+export 'movies_cache.dart';
 
 class MoviesCacheImpl implements MoviesCache {
 
