@@ -1,5 +1,4 @@
 
-import 'package:flutter/foundation.dart';
 
 class MoviesRes {
   final int _page;
@@ -20,11 +19,11 @@ class MoviesRes {
 
 class Movie {
   final String _posterPath;
-  final int _id;
+  final _id;
   final String _backDropPath;
   final String _title;
-  final List<int> _genreIds;
-  final double _rating;
+  final List _genreIds;
+  final _rating;
   final String _description;
   final String _releaseDate;
 
@@ -45,15 +44,15 @@ class Movie {
 
   String get description => _description;
 
-  double get rating => _rating;
+  get rating => _rating;
 
-  List<int> get genreIds => _genreIds;
+  List get genreIds => _genreIds;
 
   String get title => _title;
 
   String get backDropPath => _backDropPath;
 
-  int get id => _id;
+  get id => _id;
 
   String get posterPath => _posterPath;
 

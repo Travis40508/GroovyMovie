@@ -9,13 +9,17 @@ import 'package:rxdart/rxdart.dart';
 class MoviesBloc extends Bloc {
 
   MoviesRepository moviesRepository = MoviesRepositoryImpl();
+  static const _baseMoviePath = 'https://image.tmdb.org/t/p/w500';
 
   final _moviesSubject = PublishSubject<List<Movie>>();
   Observable<List<Movie>> get moviesStream => _moviesSubject.stream;
 
-  void fetchMovies({@required String type}) {
+  void fetchMovies({@required String type}) async {
     moviesRepository.fetchMovies(type: type)
-        .listen((movies) => _moviesSubject.sink.add(movies), onError: (e) => _moviesSubject.sink.addError(e));
+        .listen((movies) => _moviesSubject.sink.add(movies), onError: (e) {
+      _moviesSubject.sink.addError(e);
+      print('fetchMovies - $e');
+    });
   }
 
   //default constructor
@@ -28,6 +32,29 @@ class MoviesBloc extends Bloc {
   @override
   void dispose() {
     _moviesSubject.close();
+  }
+
+  String fetchImagePath({@required String moviePath}) {
+    return '$_baseMoviePath$moviePath';
+  }
+
+  String fetchScreenTitle({@required String title}) {
+    switch (title) {
+      case MovieTypes.popularMovies:
+        return 'Popular Movies';
+      case MovieTypes.nowPlayingMovies:
+        return 'Now Playing';
+      case MovieTypes.topRatedMovies:
+        return 'Top Rated';
+      case MovieTypes.upcomingMovies:
+        return 'Upcoming Movies';
+      default:
+        return 'Popular Movies';
+    }
+  }
+
+  String getMovieType({String type}) {
+    return type?? MovieTypes.popularMovies;
   }
 
 }
