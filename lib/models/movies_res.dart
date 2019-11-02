@@ -1,4 +1,6 @@
 
+import 'package:flutter/foundation.dart';
+
 class MoviesRes {
   final int _page;
   final int _totalResults;
@@ -25,6 +27,9 @@ class Movie {
   final double _rating;
   final String _description;
   final String _releaseDate;
+
+  //default constructor
+  Movie(this._posterPath, this._id, this._backDropPath, this._title, this._genreIds, this._rating, this._description, this._releaseDate);
 
   Movie.fromJson(Map<String, dynamic> parsedJson)
     : _posterPath = parsedJson['poster_path'],
