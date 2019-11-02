@@ -6,6 +6,9 @@ import 'package:groovy_movie/screens/movies_screen.dart';
 import 'package:groovy_movie/utils/strings.dart';
 
 class MoviesApplication extends StatelessWidget {
+
+  final primaryColor = Colors.redAccent;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,14 +27,21 @@ class MoviesApplication extends StatelessWidget {
       },
 
       theme: ThemeData(
-        primaryColor: Colors.redAccent,
+        primaryColor: primaryColor,
+        accentColor: Colors.black45,
         backgroundColor: Colors.black45,
         appBarTheme: AppBarTheme(
           iconTheme: IconThemeData(
-            color: Colors.redAccent
+            color: primaryColor
           ),
           color: Colors.transparent
         ),
+        textTheme: TextTheme(
+          caption: TextStyle(
+            color: primaryColor,
+            fontSize: 22.0,
+          )
+        )
       ),
     );
   }

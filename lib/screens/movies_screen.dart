@@ -1,9 +1,12 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:groovy_movie/blocs/movies_bloc.dart';
 import 'package:groovy_movie/models/movies_res.dart';
 import 'package:groovy_movie/routes/movie_screen_route.dart';
+import 'package:groovy_movie/widgets/error_widget.dart';
+import 'package:groovy_movie/widgets/movie_card.dart';
+import 'package:groovy_movie/widgets/movies_section_loading_widget.dart';
+import 'package:groovy_movie/widgets/stream_handler.dart';
 
 class MoviesScreen extends StatefulWidget {
   @override
@@ -42,7 +45,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
   Widget buildAppBar() {
     return AppBar(
       title: Text(
-        _bloc.fetchScreenTitle(title: _route?.movieType),
+        _bloc.fetchScreenTitle(movieType: _route?.movieType),
         style: TextStyle(color: Colors.redAccent),
       ),
       centerTitle: true,
@@ -54,38 +57,22 @@ class _MoviesScreenState extends State<MoviesScreen> {
     return StreamBuilder(
       stream: _bloc.moviesStream,
       builder: (context, AsyncSnapshot<List<Movie>> snapshot) {
-        if (snapshot.hasError) {
-          return Container();
-        }
-
-        if (!snapshot.hasData) {
-          return Container();
-        }
-
-        return PageView.builder(
+        Widget successWidget = PageView.builder(
           controller: PageController(viewportFraction: 0.9),
           scrollDirection: Axis.horizontal,
           itemCount: snapshot?.data?.length,
           itemBuilder: (context, index) {
             Movie _movie = snapshot?.data[index];
 
-            return Opacity(
-              opacity: .85,
-              child: Center(
-                child: Container(
-                  child: Card(
-                    elevation: 8.0,
-                    child: Image(
-                      fit: BoxFit.cover,
-                      image: CachedNetworkImageProvider(
-                        _bloc.fetchImagePath(moviePath: _movie.posterPath),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            );
+            return MovieCard(imagePath: _bloc.fetchImagePath(moviePath: _movie.posterPath),);
           },
+        );
+
+        return StreamHandler(
+          snapshot: snapshot,
+          errorWidget: MoviesErrorWidget(),
+          loadingWidget: MoviesSectionLoadingWidget(),
+          successWidget: successWidget,
         );
       },
     );
@@ -97,11 +84,10 @@ class _MoviesScreenState extends State<MoviesScreen> {
       child: Container(
         child: Column(
           children: <Widget>[
-            Text('hi',
-            style: TextStyle(
-              fontSize: 18.0,
-              color: Colors.white
-            ),),
+            Text(
+              'hi',
+              style: TextStyle(fontSize: 18.0, color: Colors.white),
+            ),
             Text('bye')
           ],
         ),
