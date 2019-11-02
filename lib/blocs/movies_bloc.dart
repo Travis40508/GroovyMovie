@@ -38,18 +38,18 @@ class MoviesBloc extends Bloc {
     return '$_baseMoviePath$moviePath';
   }
 
-  String fetchScreenTitle({@required String title}) {
-    switch (title) {
+  String fetchScreenTitle({@required String movieType}) {
+    switch (movieType) {
       case MovieTypes.popularMovies:
-        return 'Popular Movies';
+        return MovieTitles.popularMoviesTitle;
       case MovieTypes.nowPlayingMovies:
-        return 'Now Playing';
+        return MovieTitles.nowPlayingMoviesTitle;
       case MovieTypes.topRatedMovies:
-        return 'Top Rated';
+        return MovieTitles.topRatedMoviesTitle;
       case MovieTypes.upcomingMovies:
-        return 'Upcoming Movies';
+        return MovieTitles.upcomingMoviesTitle;
       default:
-        return 'Popular Movies';
+        return MovieTitles.popularMoviesTitle;
     }
   }
 
@@ -64,5 +64,11 @@ class MovieTypes {
   static const nowPlayingMovies = 'now_playing';
   static const topRatedMovies = 'top_rated';
   static const upcomingMovies = 'upcoming';
+}
 
+class MovieTitles {
+  static const popularMoviesTitle = 'Popular Movies';
+  static const nowPlayingMoviesTitle = 'Now Playing';
+  static const topRatedMoviesTitle = 'Top Rated';
+  static const upcomingMoviesTitle = 'Upcoming Movies';
 }
