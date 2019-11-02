@@ -35,7 +35,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
       appBar: buildAppBar(),
       body: buildBody(),
       backgroundColor: Theme.of(context).backgroundColor,
-//      drawer: buildDrawer(),
+      drawer: buildDrawer(),
     );
   }
 
@@ -91,5 +91,21 @@ class _MoviesScreenState extends State<MoviesScreen> {
     );
   }
 
-  Widget buildDrawer() {}
+  Widget buildDrawer() {
+    return Opacity(
+      opacity: .8,
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            Text('hi',
+            style: TextStyle(
+              fontSize: 18.0,
+              color: Colors.white
+            ),),
+            Text('bye')
+          ],
+        ),
+      ),
+    );
+  }
 }

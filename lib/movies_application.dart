@@ -27,6 +27,9 @@ class MoviesApplication extends StatelessWidget {
         primaryColor: Colors.redAccent,
         backgroundColor: Colors.black45,
         appBarTheme: AppBarTheme(
+          iconTheme: IconThemeData(
+            color: Colors.redAccent
+          ),
           color: Colors.transparent
         ),
       ),
