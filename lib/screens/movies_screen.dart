@@ -87,7 +87,15 @@ class _MoviesScreenState extends State<MoviesScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: _bloc.typeToTitleMap.entries.map((section) => DrawerItem(
               isCurrentItem: _bloc.isCurrentSection(section: _route?.movieType, title: section.value),
-              onClick: () => Navigator.pushReplacementNamed(context, MovieScreenRoute.routeName, arguments: MovieScreenRoute(movieType: section.key)),
+              onClick: () {
+                if (!_bloc.isCurrentSection(section: _route.movieType, title: section.value)) {
+                  Navigator.pushReplacementNamed(
+                      context, MovieScreenRoute.routeName,
+                      arguments: MovieScreenRoute(movieType: section.key));
+                } else {
+                  Navigator.pop(context);
+                }
+              },
               title: section.value,)).toList()
           ),
         ),
