@@ -26,4 +26,13 @@ class MoviesBloc extends Bloc {
   void dispose() {
     _moviesSubject.close();
   }
+
+}
+
+class MovieTypes {
+  static const popularMovies = 'popular';
+  static const nowPlayingMovies = 'now_playing';
+  static const topRatedMovies = 'top_rated';
+  static const upcomingMovies = 'upcoming';
+
 }
