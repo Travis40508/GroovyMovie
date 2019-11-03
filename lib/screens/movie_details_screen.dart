@@ -62,20 +62,27 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   }
 
   Widget buildBottomNavBar() {
-    return BottomNavigationBar(
-      backgroundColor: Theme.of(context).accentColor,
-      onTap: (i) => _bloc.onBottomNavItemSelected(itemIndex: i),
-      currentIndex: MovieDetailSections.movieDetails,
-      items: [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.info_outline),
-          title: Text(MovieDetailTitles.movieDetails)
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.movie),
-          title: Text(MovieDetailTitles.similarMovies)
-        ),
-      ],
+    return StreamBuilder (
+      stream: _bloc.navBarIndexStream,
+      initialData: MovieDetailSections.movieDetails,
+
+      builder: (context, snapshot) {
+        return BottomNavigationBar(
+          backgroundColor: Theme.of(context).accentColor,
+          onTap: (i) => _bloc.onBottomNavItemSelected(itemIndex: i),
+          currentIndex: snapshot?.data,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.info_outline),
+              title: Text(MovieDetailTitles.movieDetails)
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.movie),
+              title: Text(MovieDetailTitles.similarMovies)
+            ),
+          ],
+        );
+      }
     );
   }
 }

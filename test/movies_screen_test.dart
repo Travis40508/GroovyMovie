@@ -26,7 +26,7 @@ void main() {
     test('loading popular movies happy path test', () {
       when(moviesRepository.fetchMovies(type: 'popular')).thenAnswer((_) => Observable.just(moviesRes));
 
-      expect(moviesBloc.moviesStream, emitsInOrder([
+      expectLater(moviesBloc.moviesStream, emitsInOrder([
         emits(moviesRes)
       ]));
 
@@ -36,7 +36,7 @@ void main() {
     test('loading popular movies error path test', () {
       when(moviesRepository.fetchMovies(type: 'popular')).thenAnswer((_) => Observable.error(errorRes));
 
-      expect(moviesBloc.moviesStream, emitsInOrder([
+      expectLater(moviesBloc.moviesStream, emitsInOrder([
         emitsError(errorRes)
       ]));
 
