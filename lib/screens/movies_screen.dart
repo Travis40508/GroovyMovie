@@ -4,6 +4,7 @@ import 'package:groovy_movie/blocs/movies_bloc.dart';
 import 'package:groovy_movie/models/movies_res.dart';
 import 'package:groovy_movie/routes/movie_screen_route.dart';
 import 'package:groovy_movie/routes/movies_details_route.dart';
+import 'package:groovy_movie/routes/search_screen_route.dart';
 import 'package:groovy_movie/widgets/drawer_item.dart';
 import 'package:groovy_movie/widgets/error_widget.dart';
 import 'package:groovy_movie/widgets/movie_card.dart';
@@ -48,7 +49,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
     return AppBar(
       title: Text(_bloc.fetchScreenTitle(movieType: _route?.movieType),), centerTitle: true,
       actions: <Widget>[
-        IconButton(icon: Icon(Icons.search), onPressed: () => print('Search!'),)
+        IconButton(icon: Icon(Icons.search), onPressed: () => Navigator.pushNamed(context, SearchScreenRoute.routeName),)
       ],
     );
   }

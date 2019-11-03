@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:groovy_movie/models/movies_res.dart';
 import 'package:groovy_movie/routes/movies_details_route.dart';
+import 'package:groovy_movie/utils/strings.dart';
 
 class MovieTile extends StatelessWidget {
   final Movie movie;
@@ -19,7 +20,7 @@ class MovieTile extends StatelessWidget {
               arguments: MovieDetailsRoute(movie: movie)),
           child: Image(
             image: CachedNetworkImageProvider(
-              imagePath,
+              imagePath ?? Strings.noImageUrl,
             ),
           ),
         ));

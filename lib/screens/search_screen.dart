@@ -25,7 +25,10 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: buildBody(),
+      backgroundColor: Theme.of(context).backgroundColor,
+    );
   }
 
   Widget buildBody() {
@@ -35,9 +38,12 @@ class _SearchScreenState extends State<SearchScreen> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: TextField(
+            style: Theme.of(context).textTheme.subtitle,
+            cursorColor: Theme.of(context).primaryColor,
             controller: _controller,
             decoration: InputDecoration(
               hintText: Strings.searchHint,
+              hintStyle: Theme.of(context).textTheme.subtitle,
               border: OutlineInputBorder(),
               prefixIcon: Icon(Icons.search),
               suffixIcon: IconButton(
@@ -72,6 +78,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
                         return MovieTile(
                           movie: _movie,
+                          imagePath: _bloc.fetchImagePath(path: _movie?.posterPath),
                         );
                       }),
                 ));
