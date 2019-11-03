@@ -4,12 +4,12 @@ import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:groovy_movie/models/movies_res.dart';
 import 'package:groovy_movie/repository/movies_repository.dart';
 import 'package:groovy_movie/repository/movies_repository_impl.dart';
+import 'package:groovy_movie/utils/strings.dart';
 import 'package:rxdart/rxdart.dart';
 
 class MoviesBloc extends Bloc {
 
   MoviesRepository moviesRepository = MoviesRepositoryImpl();
-  static const _baseMoviePath = 'https://image.tmdb.org/t/p/w500';
 
   Map<String, String> typeToTitleMap = {
     MovieTypes.popularMovies: MovieTitles.popularMoviesTitle,
@@ -45,7 +45,7 @@ class MoviesBloc extends Bloc {
   }
 
   String fetchImagePath({@required String moviePath}) {
-    return '$_baseMoviePath$moviePath';
+    return '${Strings.baseMoviePath}$moviePath';
   }
 
   String fetchScreenTitle({@required String movieType}) {

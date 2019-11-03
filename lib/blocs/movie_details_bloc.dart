@@ -9,7 +9,6 @@ import 'package:rxdart/rxdart.dart';
 
 class MovieDetailsBloc extends Bloc {
 
-  static const _baseMoviePath = 'https://image.tmdb.org/t/p/w500';
   MoviesRepository repository = MoviesRepositoryImpl();
 
   MovieDetailsBloc();
@@ -23,7 +22,7 @@ class MovieDetailsBloc extends Bloc {
   }
 
   String getImagePath({@required String path}) {
-    return path != null ? '$_baseMoviePath$path' : Strings.noImageUrl;
+    return path != null ? '${Strings.baseMoviePath}$path' : Strings.noImageUrl;
   }
 
   void fetchSimilarMovies({@required int id}) {

@@ -39,10 +39,12 @@ class _SearchScreenState extends State<SearchScreen> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: TextField(
+            autofocus: true,
             style: Theme.of(context).textTheme.subtitle,
             cursorColor: Theme.of(context).primaryColor,
             controller: _controller,
             decoration: InputDecoration(
+              labelText: Strings.searchLabel,
               hintText: Strings.searchHint,
               hintStyle: Theme.of(context).textTheme.subtitle,
               border: OutlineInputBorder(),

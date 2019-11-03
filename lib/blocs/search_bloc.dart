@@ -10,7 +10,6 @@ import 'package:rxdart/rxdart.dart';
 
 class SearchBloc extends Bloc {
   MoviesRepository repository = MoviesRepositoryImpl();
-  static const _baseMoviePath = 'https://image.tmdb.org/t/p/w500';
   Timer debounce;
   static const int INPUT_DELAY = 750;
 
@@ -56,6 +55,6 @@ class SearchBloc extends Bloc {
   }
 
   String fetchImagePath({@required String path}) {
-    return path != null ? '$_baseMoviePath$path' : Strings.noImageUrl;
+    return path != null ? '${Strings.baseMoviePath}$path' : Strings.noImageUrl;
   }
 }

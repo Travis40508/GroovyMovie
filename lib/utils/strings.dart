@@ -9,4 +9,6 @@ class Strings {
   static const String emptyResultText = 'We weren\'t able to find what you\'re looking for.\n Please try something else.';
   static const String releaseDate = 'Release Date - ';
   static const String rating = 'Rating - ';
+  static const String baseMoviePath = 'https://image.tmdb.org/t/p/w500';
+  static const String searchLabel = 'Search';
 }
