@@ -28,7 +28,7 @@ class MoviesBloc extends Bloc {
       _moviesSubject.sink.add(movies);
     }, onError: (e) {
       _moviesSubject.sink.addError(e);
-      print('fetchMovies - $e');
+      print(e);
     });
   }
 
@@ -73,6 +73,7 @@ class MoviesBloc extends Bloc {
 
 }
 
+///Enum for movie types
 class MovieTypes {
   static const popularMovies = 'popular';
   static const nowPlayingMovies = 'now_playing';
@@ -80,6 +81,7 @@ class MovieTypes {
   static const upcomingMovies = 'upcoming';
 }
 
+///Enum for movie type titles
 class MovieTitles {
   static const popularMoviesTitle = 'Popular Movies';
   static const nowPlayingMoviesTitle = 'Now Playing';

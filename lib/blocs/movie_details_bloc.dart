@@ -39,13 +39,3 @@ class MovieDetailsBloc extends Bloc {
   MovieDetailsBloc.withMocks({@required this.repository});
 
 }
-
-class MovieDetailSections {
-  static const movieDetails = 0;
-  static const similarMovies = 1;
-}
-
-class MovieDetailTitles {
-  static const movieDetails = 'Details';
-  static const similarMovies = 'Similar Movies';
-}

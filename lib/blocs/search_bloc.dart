@@ -10,15 +10,14 @@ import 'package:rxdart/rxdart.dart';
 
 class SearchBloc extends Bloc {
   MoviesRepository repository = MoviesRepositoryImpl();
+
   Timer debounce;
   static const int INPUT_DELAY = 750;
 
   final _searchedMoviesSubject = PublishSubject<List<Movie>>();
-
   Observable<List<Movie>> get searchedMoviesStream => _searchedMoviesSubject.stream;
 
   final _loadingSubject = PublishSubject<bool>();
-
   Observable<bool> get loadingStream => _loadingSubject.stream;
 
   SearchBloc();
