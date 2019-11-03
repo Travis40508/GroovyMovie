@@ -29,6 +29,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       body: buildBody(),
       backgroundColor: Theme.of(context).backgroundColor,
+      resizeToAvoidBottomPadding: false,
     );
   }
 
