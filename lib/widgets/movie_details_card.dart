@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:groovy_movie/models/movies_res.dart';
+import 'package:groovy_movie/utils/strings.dart';
 
 class MovieDetailsCard extends StatelessWidget {
 
@@ -27,7 +28,7 @@ class MovieDetailsCard extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            'Release Date - ${movie?.releaseDate}',
+            '${Strings.releaseDate}${movie?.releaseDate}',
             style: Theme.of(context).textTheme.subtitle,
             textAlign: TextAlign.justify,
           ),
@@ -38,7 +39,7 @@ class MovieDetailsCard extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Text(
-                'Rating - ${movie?.rating?.toString()}',
+                '${Strings.rating}${movie?.rating?.toString()}',
                 style: Theme.of(context).textTheme.subtitle,
               ),
             ],

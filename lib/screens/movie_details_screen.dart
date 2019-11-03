@@ -73,6 +73,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
               snapshot: snapshot,
               errorWidget: MoviesErrorWidget(),
               loadingWidget: MoviesSectionLoadingWidget(),
+              emptyResultWidget: Container(),
               successWidget: Column(
                 children: <Widget>[
                   Padding(

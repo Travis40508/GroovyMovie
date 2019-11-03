@@ -3,6 +3,7 @@ import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:groovy_movie/blocs/search_bloc.dart';
 import 'package:groovy_movie/models/movies_res.dart';
 import 'package:groovy_movie/utils/strings.dart';
+import 'package:groovy_movie/widgets/empty_result_widget.dart';
 import 'package:groovy_movie/widgets/error_widget.dart';
 import 'package:groovy_movie/widgets/movie_tile.dart';
 import 'package:groovy_movie/widgets/movies_loading_widget.dart';
@@ -69,6 +70,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 snapshot: snapshot,
                 errorWidget: MoviesErrorWidget(),
                 loadingWidget: Container(),
+                emptyResultWidget: EmptyResultWidget(),
                 successWidget: Expanded(
                   child: GridView.builder(
                       physics: ScrollPhysics(),

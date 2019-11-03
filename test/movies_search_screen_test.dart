@@ -51,4 +51,19 @@ void main() {
     });
 
   });
+
+  group('fetching image path', () {
+
+    test('fetching image path when not null', () {
+      final path = '/stub';
+
+      expect(_bloc.fetchImagePath(path: path), 'https://image.tmdb.org/t/p/w500/stub');
+    });
+
+    test('fetching image path when null', () {
+      final path = null;
+
+      expect(_bloc.fetchImagePath(path: path), Strings.noImageUrl);
+    });
+  });
 }
