@@ -23,7 +23,10 @@ class MoviesBloc extends Bloc {
 
   void fetchMovies({@required String type}) async {
     moviesRepository.fetchMovies(type: type)
-        .listen((movies) => _moviesSubject.sink.add(movies), onError: (e) {
+        .listen((movies) {
+          movies.removeWhere((movie) => movie.posterPath == null);
+      _moviesSubject.sink.add(movies);
+    }, onError: (e) {
       _moviesSubject.sink.addError(e);
       print('fetchMovies - $e');
     });

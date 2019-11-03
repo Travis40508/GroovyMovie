@@ -5,6 +5,7 @@ import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:groovy_movie/models/movies_res.dart';
 import 'package:groovy_movie/repository/movies_repository.dart';
 import 'package:groovy_movie/repository/movies_repository_impl.dart';
+import 'package:groovy_movie/utils/strings.dart';
 import 'package:rxdart/rxdart.dart';
 
 class SearchBloc extends Bloc {
@@ -15,8 +16,7 @@ class SearchBloc extends Bloc {
 
   final _searchedMoviesSubject = PublishSubject<List<Movie>>();
 
-  Observable<List<Movie>> get searchedMoviesStream =>
-      _searchedMoviesSubject.stream;
+  Observable<List<Movie>> get searchedMoviesStream => _searchedMoviesSubject.stream;
 
   final _loadingSubject = PublishSubject<bool>();
 
@@ -43,6 +43,7 @@ class SearchBloc extends Bloc {
         _searchedMoviesSubject.sink.add(null);
 
         repository.searchMovies(query: query).listen((movies) {
+          movies.removeWhere((movie) => movie.posterPath == null);
           _searchedMoviesSubject.sink.add(movies);
           _loadingSubject.sink.add(false);
         }, onError: (e) {
@@ -55,6 +56,6 @@ class SearchBloc extends Bloc {
   }
 
   String fetchImagePath({@required String path}) {
-    return '$_baseMoviePath$path';
+    return path != null ? '$_baseMoviePath$path' : Strings.noImageUrl;
   }
 }

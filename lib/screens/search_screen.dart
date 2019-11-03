@@ -70,15 +70,20 @@ class _SearchScreenState extends State<SearchScreen> {
                 errorWidget: MoviesErrorWidget(),
                 loadingWidget: Container(),
                 successWidget: Expanded(
-                  child: ListView.builder(
+                  child: GridView.builder(
+                      physics: ScrollPhysics(),
+                      scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       itemCount: snapshot?.data?.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2),
                       itemBuilder: (context, index) {
-                        Movie _movie = snapshot?.data[index];
+                        Movie movie = snapshot?.data[index];
 
                         return MovieTile(
-                          movie: _movie,
-                          imagePath: _bloc.fetchImagePath(path: _movie?.posterPath),
+                          movie: movie,
+                          imagePath: _bloc.fetchImagePath(
+                              path: movie?.posterPath),
                         );
                       }),
                 ));

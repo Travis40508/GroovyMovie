@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:groovy_movie/blocs/movies_bloc.dart';
 import 'package:groovy_movie/blocs/search_bloc.dart';
@@ -21,6 +22,13 @@ class MoviesApplication extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    ///Locks screen to Portrait mode
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: Strings.applicationName,
@@ -39,7 +47,7 @@ class MoviesApplication extends StatelessWidget {
 
         SearchScreenRoute.routeName: (context) => BlocProvider(
           bloc: SearchBloc(),
-          child: SearchScreen(),
+          child: SafeArea(child: SearchScreen()),
         )
       },
 
