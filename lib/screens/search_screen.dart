@@ -20,7 +20,9 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   void didChangeDependencies() {
-    _bloc = BlocProvider.of<SearchBloc>(context);
+    if (_bloc == null) {
+      _bloc = BlocProvider.of<SearchBloc>(context);
+    }
     super.didChangeDependencies();
   }
 
