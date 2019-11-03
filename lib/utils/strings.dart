@@ -6,4 +6,6 @@ class Strings {
 
   static const String empty = '';
 
+  static const String searchHint = 'Ex. The Godfather';
+
 }
