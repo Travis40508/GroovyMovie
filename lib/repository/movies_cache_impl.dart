@@ -8,13 +8,13 @@ class MoviesCacheImpl implements MoviesCache {
   Map<String, MoviesRes> _cache = Map();
 
   @override
-  void cacheMovies({String movieType, MoviesRes movies}) {
-    _cache.putIfAbsent(movieType, () => movies);
+  void cacheMovies({String key, MoviesRes movies}) {
+    _cache.putIfAbsent(key, () => movies);
   }
 
   @override
-  Future<MoviesRes> fetchMoviesFromCache({String movieType}) async {
-    return _cache[movieType];
+  Future<MoviesRes> fetchMoviesFromCache({String key}) async {
+    return _cache[key];
   }
 
 }

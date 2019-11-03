@@ -20,15 +20,17 @@ class MoviesRepositoryImpl implements MoviesRepository {
 
   @override
   Observable<List<Movie>> fetchMovies({@required String type}) {
-    return Observable.fromFuture(_moviesCache.fetchMoviesFromCache(movieType: type))
+    return Observable.fromFuture(_moviesCache.fetchMoviesFromCache(key: type))
         .flatMap((res) => res != null ? Observable.just(res) : Observable.fromFuture(_moviesService.fetchMovies(type: type)))
-        .doOnData((res) => _moviesCache.cacheMovies(movieType: type, movies: res))
+        .doOnData((res) => _moviesCache.cacheMovies(key: type, movies: res))
         .map((res) => res.movies);
   }
 
   @override
   Observable<List<Movie>> fetchSimilarMovies({int id}) {
-    return Observable.fromFuture(_moviesService.fetchSimilarMovies(id: id))
+    return Observable.fromFuture(_moviesCache.fetchMoviesFromCache(key: id.toString()))
+        .flatMap((res) => res != null ? Observable.just(res) : Observable.fromFuture(_moviesService.fetchSimilarMovies(id: id)))
+        .doOnData((res) => _moviesCache.cacheMovies(key: id.toString(), movies: res))
         .map((res) => res.movies);
   }
 }
