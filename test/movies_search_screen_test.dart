@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:groovy_movie/blocs/search_bloc.dart';
 import 'package:groovy_movie/repository/movies_repository_impl.dart';
+import 'package:groovy_movie/utils/strings.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rxdart/rxdart.dart';
 import 'mocks/mock_objects.dart';
@@ -24,6 +25,7 @@ void main() {
       when(_repository.searchMovies(query: 'stub')).thenAnswer((_) => Observable.just(searchRes));
 
       expectLater(_bloc.searchedMoviesStream, emitsInOrder([
+        null,
         emits(searchRes)
       ]));
 
@@ -35,6 +37,7 @@ void main() {
       when(_repository.searchMovies(query: 'stub')).thenAnswer((_) => Observable.error(errorRes));
 
       expectLater(_bloc.searchedMoviesStream, emitsInOrder([
+        null,
         emitsError(errorRes)
       ]));
 
@@ -42,11 +45,10 @@ void main() {
     });
 
     test('testing search when field is empty', () {
-
+      _bloc.onTextChanged(query: Strings.empty);
+      
+      expect(_bloc.debounce, null);
     });
 
-    test('testing search when no error but returns zero results', () {
-
-    });
   });
 }

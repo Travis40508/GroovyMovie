@@ -1,3 +1,4 @@
+import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
@@ -7,11 +8,18 @@ import 'package:groovy_movie/repository/movies_repository_impl.dart';
 import 'package:rxdart/rxdart.dart';
 
 class SearchBloc extends Bloc {
-
   MoviesRepository repository = MoviesRepositoryImpl();
+  Timer debounce;
+  static const int INPUT_DELAY = 750;
 
   final _searchedMoviesSubject = PublishSubject<List<Movie>>();
-  Observable<List<Movie>> get searchedMoviesStream => _searchedMoviesSubject.stream;
+
+  Observable<List<Movie>> get searchedMoviesStream =>
+      _searchedMoviesSubject.stream;
+
+  final _loadingSubject = PublishSubject<bool>();
+
+  Observable<bool> get loadingStream => _loadingSubject.stream;
 
   SearchBloc();
 
@@ -20,14 +28,28 @@ class SearchBloc extends Bloc {
   @override
   void dispose() {
     _searchedMoviesSubject.close();
+    _loadingSubject.close();
   }
 
   void onTextChanged({@required String query}) {
-    repository.searchMovies(query: query)
-        .listen((movies) => _searchedMoviesSubject.sink.add(movies), onError: (e) {
-        print(e);
-        _searchedMoviesSubject.sink.addError(e);
-    });
-  }
+    if (debounce?.isActive ?? false) {
+      debounce.cancel();
+    }
 
+    if (query.length > 0) {
+      debounce = Timer(const Duration(milliseconds: INPUT_DELAY), () {
+        _loadingSubject.sink.add(true);
+        _searchedMoviesSubject.sink.add(null);
+
+        repository.searchMovies(query: query).listen((movies) {
+          _searchedMoviesSubject.sink.add(movies);
+          _loadingSubject.sink.add(false);
+        }, onError: (e) {
+          print(e);
+          _searchedMoviesSubject.sink.addError(e);
+          _loadingSubject.sink.add(false);
+        });
+      });
+    }
+  }
 }
