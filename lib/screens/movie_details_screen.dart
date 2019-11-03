@@ -90,9 +90,12 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
 
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Image(
-                            image: CachedNetworkImageProvider(
-                              _bloc.getImagePath(path: _similarMovie?.posterPath)
+                          child: InkWell(
+                            onTap: () => Navigator.pushNamed(context, MovieDetailsRoute.routeName, arguments: MovieDetailsRoute(movie: _similarMovie)),
+                            child: Image(
+                              image: CachedNetworkImageProvider(
+                                _bloc.getImagePath(path: _similarMovie?.posterPath)
+                              ),
                             ),
                           ),
                         );
