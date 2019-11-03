@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:groovy_movie/blocs/movie_details_bloc.dart';
 import 'package:groovy_movie/models/movies_res.dart';
+import 'package:groovy_movie/routes/movie_screen_route.dart';
 import 'package:groovy_movie/routes/movies_details_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:groovy_movie/utils/strings.dart';
@@ -45,7 +46,11 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   }
 
   Widget buildAppBar() {
-    return AppBar(title: Text(_route?.movie?.title), centerTitle: true,);
+    return AppBar(
+      title: Text(_route?.movie?.title),
+      centerTitle: true,
+      leading: IconButton(icon: Icon(Icons.home), onPressed: () => Navigator.popUntil(context, ModalRoute.withName(MovieScreenRoute.routeName)),),
+    );
   }
 
   Widget buildBody() {

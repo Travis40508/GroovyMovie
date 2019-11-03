@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:groovy_movie/blocs/movies_bloc.dart';
@@ -5,6 +6,7 @@ import 'package:groovy_movie/routes/movie_screen_route.dart';
 import 'package:groovy_movie/routes/movies_details_route.dart';
 import 'package:groovy_movie/screens/movie_details_screen.dart';
 import 'package:groovy_movie/screens/movies_screen.dart';
+import 'package:groovy_movie/screens/movies_splash_screen.dart';
 import 'package:groovy_movie/utils/strings.dart';
 import 'blocs/movie_details_bloc.dart';
 
@@ -19,10 +21,7 @@ class MoviesApplication extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: Strings.applicationName,
-      home: BlocProvider(
-        bloc: MoviesBloc(),
-        child: MoviesScreen(),
-      ),
+      home: MoviesSplashScreen(),
 
       routes: {
         MovieScreenRoute.routeName: (context) => BlocProvider(
@@ -68,6 +67,12 @@ class MoviesApplication extends StatelessWidget {
               fontSize: 28.0,
               fontWeight: FontWeight.bold
           ),
+          headline: TextStyle(
+            color: primaryColor,
+            fontSize: 48.0,
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.bold,
+          )
         )
       ),
     );
