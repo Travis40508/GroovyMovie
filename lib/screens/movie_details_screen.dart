@@ -8,6 +8,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:groovy_movie/utils/strings.dart';
 import 'package:groovy_movie/widgets/error_widget.dart';
 import 'package:groovy_movie/widgets/movie_details_card.dart';
+import 'package:groovy_movie/widgets/movie_tile.dart';
 import 'package:groovy_movie/widgets/movies_section_loading_widget.dart';
 import 'package:groovy_movie/widgets/stream_handler.dart';
 
@@ -17,7 +18,6 @@ class MovieDetailsScreen extends StatefulWidget {
 }
 
 class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
-
   MovieDetailsRoute _route;
   MovieDetailsBloc _bloc;
 
@@ -49,7 +49,10 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
     return AppBar(
       title: Text(_route?.movie?.title),
       centerTitle: true,
-      leading: IconButton(icon: Icon(Icons.home), onPressed: () => Navigator.popUntil(context, ModalRoute.withName(MovieScreenRoute.routeName)),),
+      leading: IconButton(
+        icon: Icon(Icons.home),
+        onPressed: () => Navigator.popUntil(context, ModalRoute.withName(MovieScreenRoute.routeName)),
+      ),
     );
   }
 
@@ -58,17 +61,14 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
       shrinkWrap: true,
       children: <Widget>[
         Image(
-          image: CachedNetworkImageProvider(
-            _bloc.getImagePath(path: _route?.movie?.backDropPath)
-          ),
-        ), MovieDetailsCard(
+          image: CachedNetworkImageProvider(_bloc.getImagePath(path: _route?.movie?.backDropPath)),
+        ),
+        MovieDetailsCard(
           movie: _route?.movie,
         ),
         StreamBuilder(
           stream: _bloc.similarMoviesStream,
-
           builder: (context, AsyncSnapshot<List<Movie>> snapshot) {
-
             return StreamHandler(
               snapshot: snapshot,
               errorWidget: MoviesErrorWidget(),
@@ -84,28 +84,21 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                     ),
                   ),
                   GridView.builder(
-                    physics: ScrollPhysics(),
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
+                      physics: ScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
                       itemCount: snapshot?.data?.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2),
                       itemBuilder: (context, index) {
                         Movie _similarMovie = snapshot?.data[index];
 
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: InkWell(
-                            onTap: () => Navigator.pushNamed(context, MovieDetailsRoute.routeName, arguments: MovieDetailsRoute(movie: _similarMovie)),
-                            child: Image(
-                              image: CachedNetworkImageProvider(
-                                _bloc.getImagePath(path: _similarMovie?.posterPath)
-                              ),
-                            ),
-                          ),
+                        return MovieTile(
+                          movie: _similarMovie,
+                          imagePath: _bloc.getImagePath(
+                              path: _similarMovie?.posterPath),
                         );
-                      }
-                  ),
+                      }),
                 ],
               ),
             );
@@ -114,5 +107,4 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
       ],
     );
   }
-
 }
