@@ -60,7 +60,7 @@ class MoviesApplication extends StatelessWidget {
           ),
           subtitle: TextStyle(
             color: primaryColor,
-            fontSize: 24.0,
+            fontSize: 16.0,
             fontWeight: FontWeight.normal
           ),
           title: TextStyle(

@@ -14,15 +14,4 @@ void main() {
     _bloc = MovieDetailsBloc.withMocks(repository: _repository);
   });
 
-  group('testing bottom nav bar', () {
-
-    test('testing changing indexes', () {
-
-      expectLater(_bloc.navBarIndexStream, emitsInOrder([
-        emits(MovieDetailSections.similarMovies)
-      ]));
-
-      _bloc.onBottomNavItemSelected(itemIndex: MovieDetailSections.similarMovies);
-    });
-  });
 }

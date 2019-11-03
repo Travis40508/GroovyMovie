@@ -9,23 +9,16 @@ class MovieDetailsBloc extends Bloc {
   static const _baseMoviePath = 'https://image.tmdb.org/t/p/w500';
   MoviesRepository repository;
 
-  final _navBarIndexSubject = PublishSubject<int>();
-  Observable<int> get navBarIndexStream => _navBarIndexSubject.stream;
-
   MovieDetailsBloc();
 
   @override
   void dispose() {
-    _navBarIndexSubject.close();
   }
 
   String getImagePath({@required String path}) {
     return '$_baseMoviePath$path';
   }
 
-  void onBottomNavItemSelected({@required int itemIndex}) {
-    _navBarIndexSubject.sink.add(itemIndex);
-  }
 
   MovieDetailsBloc.withMocks({@required this.repository});
 
