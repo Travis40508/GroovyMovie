@@ -5,4 +5,5 @@ import 'package:rxdart/rxdart.dart';
 abstract class MoviesRepository {
   Observable<List<Movie>> fetchMovies({@required String type});
   Observable<List<Movie>> fetchSimilarMovies({@required int id});
+  Observable<List<Movie>> searchMovies({@required String query});
 }

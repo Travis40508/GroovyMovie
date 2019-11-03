@@ -33,4 +33,10 @@ class MoviesRepositoryImpl implements MoviesRepository {
         .doOnData((res) => _moviesCache.cacheMovies(key: id.toString(), movies: res))
         .map((res) => res.movies);
   }
+
+  @override
+  Observable<List<Movie>> searchMovies({String query}) {
+    return Observable.fromFuture(_moviesService.fetchSearchedMovies(query: query))
+        .map((res) => res.movies);
+  }
 }

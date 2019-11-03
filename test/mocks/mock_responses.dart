@@ -13,4 +13,10 @@ class MockResponses {
 
     return mockMovies;
   }
+
+  static List<Movie> fetchEmptyMoviesResponse() {
+    List<Movie> mockMovies = List();
+
+    return mockMovies;
+  }
 }
