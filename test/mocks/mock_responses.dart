@@ -22,7 +22,7 @@ class MockResponses {
 
   static List<String> fetchMovieImages() {
     List<String> images = List();
-
+    images.add('stub');
     return images;
   }
 }

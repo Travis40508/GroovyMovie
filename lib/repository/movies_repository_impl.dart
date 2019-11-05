@@ -39,4 +39,10 @@ class MoviesRepositoryImpl implements MoviesRepository {
     return Observable.fromFuture(_moviesService.fetchSearchedMovies(query: query))
         .map((res) => res.movies);
   }
+
+  @override
+  Observable<List<String>> fetchImages({int movieId}) {
+    // TODO: implement fetchImages
+    return null;
+  }
 }

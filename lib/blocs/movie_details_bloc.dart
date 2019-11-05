@@ -16,9 +16,13 @@ class MovieDetailsBloc extends Bloc {
   final _similarMoviesSubject = PublishSubject<List<Movie>>();
   Observable<List<Movie>> get similarMoviesStream => _similarMoviesSubject.stream;
 
+  final _movieImagesSubject = PublishSubject<List<String>>();
+  Observable<List<String>> get movieImagesStream => _movieImagesSubject.stream;
+
   @override
   void dispose() {
     _similarMoviesSubject.close();
+    _movieImagesSubject.close();
   }
 
   String getImagePath({@required String path}) {
@@ -33,6 +37,14 @@ class MovieDetailsBloc extends Bloc {
     }, onError: (e) {
        print(e);
        _similarMoviesSubject.sink.addError(e);
+    });
+  }
+
+  void fetchMovieImages({@required int movieId}) {
+    repository.fetchImages(movieId: movieId)
+        .listen((images) => _movieImagesSubject.sink.add(images.length > 0 ? images : null), onError: (e) {
+      _movieImagesSubject.sink.addError(e);
+      print(e);
     });
   }
 

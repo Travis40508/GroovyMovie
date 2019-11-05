@@ -41,4 +41,42 @@ void main() {
       _bloc.fetchSimilarMovies(id: 12);
     });
   });
+
+  group('movie images', () {
+
+    test('fetching movie images happy path', () {
+      final movieImagesRes = MockResponses.fetchMovieImages();
+      when(_repository.fetchImages(movieId: 12)).thenAnswer((_) => Observable.just(movieImagesRes));
+
+      expectLater(_bloc.movieImagesStream, emitsInOrder([
+        emits(movieImagesRes)
+      ]));
+
+      _bloc.fetchMovieImages(movieId: 12);
+    });
+
+    test('fetching movie images happy path no images', () {
+      //empty list
+      final movieImagesRes = List<String>();
+      when(_repository.fetchImages(movieId: 12)).thenAnswer((_) => Observable.just(movieImagesRes));
+
+      expectLater(_bloc.movieImagesStream, emitsInOrder([
+        emits(null)
+      ]));
+
+      _bloc.fetchMovieImages(movieId: 12);
+    });
+
+    test('fetching movie images error path', () {
+      //empty list
+      final errorRes = Error();
+      when(_repository.fetchImages(movieId: 12)).thenAnswer((_) => Observable.error(errorRes));
+
+      expectLater(_bloc.movieImagesStream, emitsInOrder([
+        emitsError(errorRes)
+      ]));
+
+      _bloc.fetchMovieImages(movieId: 12);
+    });
+  });
 }
