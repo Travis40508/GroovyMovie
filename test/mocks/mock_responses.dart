@@ -19,4 +19,10 @@ class MockResponses {
 
     return mockMovies;
   }
+
+  static List<String> fetchMovieImages() {
+    List<String> images = List();
+
+    return images;
+  }
 }
