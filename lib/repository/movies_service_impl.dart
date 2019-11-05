@@ -1,5 +1,6 @@
 
 
+import 'package:groovy_movie/models/movie_images_res.dart';
 import 'package:groovy_movie/models/movies_res.dart';
 import 'package:groovy_movie/repository/movies_service.dart';
 import 'package:flutter/foundation.dart';
@@ -14,6 +15,7 @@ class MoviesServiceImpl implements MoviesService {
   static const String _similarParam = '/similar';
   static const String _searchParam = '/search';
   static const String _queryParam = 'query=';
+  static const String _imagesParam = '/images';
   static const String _apiKey = 'api_key=418f69f7c0d1fed486637082642b4e59';
 
   Client _client = Client();
@@ -52,6 +54,18 @@ class MoviesServiceImpl implements MoviesService {
     print('Response from - $url = $json');
 
     return MoviesRes.fromJson(json);
+  }
+
+  @override
+  Future<MovieImagesRes> fetchMovieImages({int movieId}) async {
+    final url = '$_baseUrl$_movieParam/$movieId$_imagesParam?$_apiKey';
+    final res = await _client.get(url);
+    final json = jsonDecode(res.body);
+
+    print('${DateTime.now()} - Fetching response from - $url');
+    print('Response from - $url = $json');
+    
+    return MovieImagesRes.fromJson(json);
   }
 
 }

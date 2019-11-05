@@ -30,7 +30,7 @@ class ImageBackDrops {
 }
 
 class ImagePosters {
-  
+
   final String _imagePath;
 
   ImagePosters.fromJson(Map<String, dynamic> parsedJson)
