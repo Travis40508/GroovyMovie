@@ -1,8 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:groovy_movie/blocs/movie_images_bloc.dart';
 import 'package:groovy_movie/repository/movies_repository_impl.dart';
-import 'package:groovy_movie/utils/strings.dart';
-import 'package:mockito/mockito.dart';
 
 import 'mocks/mock_objects.dart';
 import 'mocks/mock_responses.dart';
