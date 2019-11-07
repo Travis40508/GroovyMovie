@@ -2,12 +2,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+import 'package:groovy_movie/blocs/movie_images_bloc.dart';
 import 'package:groovy_movie/blocs/movies_bloc.dart';
 import 'package:groovy_movie/blocs/search_bloc.dart';
+import 'package:groovy_movie/routes/movie_images_route.dart';
 import 'package:groovy_movie/routes/movie_screen_route.dart';
 import 'package:groovy_movie/routes/movies_details_route.dart';
 import 'package:groovy_movie/routes/search_screen_route.dart';
 import 'package:groovy_movie/screens/movie_details_screen.dart';
+import 'package:groovy_movie/screens/movie_images_screen.dart';
 import 'package:groovy_movie/screens/movies_screen.dart';
 import 'package:groovy_movie/screens/movies_splash_screen.dart';
 import 'package:groovy_movie/screens/search_screen.dart';
@@ -48,6 +51,11 @@ class MoviesApplication extends StatelessWidget {
         SearchScreenRoute.routeName: (context) => BlocProvider(
           bloc: SearchBloc(),
           child: SafeArea(child: SearchScreen()),
+        ),
+
+        MovieImagesRoute.routeName: (context) => BlocProvider(
+          bloc: MovieImagesBloc(),
+          child: MovieImagesScreen(),
         )
       },
 

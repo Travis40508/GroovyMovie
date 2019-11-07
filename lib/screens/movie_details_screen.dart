@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:groovy_movie/blocs/movie_details_bloc.dart';
 import 'package:groovy_movie/models/movies_res.dart';
+import 'package:groovy_movie/routes/movie_images_route.dart';
 import 'package:groovy_movie/routes/movie_screen_route.dart';
 import 'package:groovy_movie/routes/movies_details_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -76,7 +77,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                     bottom: 10.0,
                     child: IconButton(
                       icon: Icon(Icons.image, color: Theme.of(context).primaryColor, size: 48.0,),
-                      onPressed: () => print('image tapped!'),
+                      onPressed: () => Navigator.of(context).pushNamed(MovieImagesRoute.routeName, arguments: MovieImagesRoute(images: snapshot?.data)),
                     ),
                   ),
                 );
