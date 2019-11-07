@@ -60,8 +60,29 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
     return ListView(
       shrinkWrap: true,
       children: <Widget>[
-        Image(
-          image: CachedNetworkImageProvider(_bloc.getImagePath(path: _route?.movie?.backDropPath)),
+        Stack(
+          children: <Widget>[
+            Image(
+              image: CachedNetworkImageProvider(_bloc.getImagePath(path: _route?.movie?.backDropPath)),
+            ), StreamBuilder (
+              stream: _bloc.movieImagesStream,
+              builder: (context, AsyncSnapshot<List<String>> snapshot) {
+                return StreamHandler(
+                  snapshot: snapshot,
+                  errorWidget: Container(),
+                  loadingWidget: Container(),
+                  successWidget: Positioned(
+                    right: 10.0,
+                    bottom: 10.0,
+                    child: IconButton(
+                      icon: Icon(Icons.image, color: Theme.of(context).primaryColor, size: 48.0,),
+                      onPressed: () => print('image tapped!'),
+                    ),
+                  ),
+                );
+              }
+            ),
+          ],
         ),
         MovieDetailsCard(
           movie: _route?.movie,
