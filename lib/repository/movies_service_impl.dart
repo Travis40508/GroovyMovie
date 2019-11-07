@@ -64,7 +64,7 @@ class MoviesServiceImpl implements MoviesService {
 
     print('${DateTime.now()} - Fetching response from - $url');
     print('Response from - $url = $json');
-    
+
     return MovieImagesRes.fromJson(json);
   }
 
