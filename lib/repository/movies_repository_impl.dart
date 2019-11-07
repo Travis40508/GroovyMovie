@@ -42,11 +42,12 @@ class MoviesRepositoryImpl implements MoviesRepository {
 
   @override
   Observable<List<String>> fetchImages({int movieId}) {
-    return Observable.fromFuture(_moviesService.fetchMovieImages(movieId: movieId))
-      .flatMapIterable((res) => Observable.just(res.imageBackDrops))
+    return Observable.fromFuture(_moviesCache.fetchMovieImagesFromCache(id: movieId))
+        .flatMap((res) => res != null ? Observable.just(res) : Observable.fromFuture(_moviesService.fetchMovieImages(movieId: movieId)))
+        .doOnData((res) => _moviesCache.cacheMovieImages(id: movieId, images: res))
+        .flatMapIterable((res) => Observable.just(res.imageBackDrops))
         .map((image) => image.imagePath)
         .toList()
         .asObservable();
-
   }
 }

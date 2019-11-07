@@ -50,4 +50,9 @@ class MovieDetailsBloc extends Bloc {
 
   MovieDetailsBloc.withMocks({@required this.repository});
 
+  void fetchMovieInfo({@required int id}) async {
+    fetchSimilarMovies(id: id);
+    fetchMovieImages(movieId: id);
+  }
+
 }

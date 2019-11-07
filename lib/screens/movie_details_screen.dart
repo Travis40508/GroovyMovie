@@ -26,7 +26,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
     _route = ModalRoute.of(context).settings.arguments;
     _bloc = BlocProvider.of<MovieDetailsBloc>(context);
 
-    _bloc.fetchSimilarMovies(id: _route?.movie?.id);
+    _bloc.fetchMovieInfo(id: _route?.movie?.id);
     super.didChangeDependencies();
   }
 
