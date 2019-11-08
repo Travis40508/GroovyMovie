@@ -27,5 +27,11 @@ void main() {
 
       _bloc.populateImages(images: _imagesRes);
     });
+
+    test('testing getting correct image path from image path', () {
+      final _imageUrl = '/stub';
+
+      expect(_bloc.fetchImageUrl(imagePath: _imageUrl), 'https://image.tmdb.org/t/p/w500/stub');
+    });
   });
 }
