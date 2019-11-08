@@ -10,6 +10,7 @@ import 'package:flutter/foundation.dart';
 class MovieImagesBloc extends Bloc {
 
   MoviesRepository repository = MoviesRepositoryImpl();
+  static const _streamDelay = 500;
 
   final _movieImagesSubject = PublishSubject<List<String>>();
   Observable<List<String>> get movieImagesStream => _movieImagesSubject.stream;
@@ -25,7 +26,8 @@ class MovieImagesBloc extends Bloc {
 
 
   void populateImages({@required List<String> images}) {
-    Future.delayed(Duration(milliseconds: 500), () => _movieImagesSubject.sink.add(images));
+    //This delay is necessary because we're populating our bloc before our widget is drawn
+    Future.delayed(Duration(milliseconds: _streamDelay), () => _movieImagesSubject.sink.add(images));
   }
 
   String fetchImageUrl({@required String imagePath}) {
