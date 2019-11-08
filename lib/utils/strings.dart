@@ -11,4 +11,5 @@ class Strings {
   static const String rating = 'Rating - ';
   static const String baseMoviePath = 'https://image.tmdb.org/t/p/w500';
   static const String searchLabel = 'Search';
+  static const String imagesTitle = 'Images';
 }

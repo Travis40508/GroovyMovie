@@ -4,6 +4,7 @@ import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:groovy_movie/blocs/movie_images_bloc.dart';
 import 'package:groovy_movie/routes/movie_images_route.dart';
 import 'package:groovy_movie/routes/movie_screen_route.dart';
+import 'package:groovy_movie/utils/strings.dart';
 import 'package:groovy_movie/widgets/error_widget.dart';
 import 'package:groovy_movie/widgets/movies_loading_widget.dart';
 import 'package:groovy_movie/widgets/stream_handler.dart';
@@ -48,7 +49,7 @@ class _MovieImagesScreenState extends State<MovieImagesScreen> {
 
   Widget buildAppBar() {
     return AppBar(
-      title: Text('Images'),
+      title: Text(Strings.imagesTitle),
       centerTitle: true,
       leading: IconButton(
         icon: Icon(Icons.home),
@@ -66,21 +67,30 @@ class _MovieImagesScreenState extends State<MovieImagesScreen> {
           errorWidget: MoviesErrorWidget(),
           loadingWidget: Container(),
           successWidget:
-          ListView.builder(
-            itemCount: snapshot?.data?.length,
-            itemBuilder: (context, index) {
-              String imageUrl = snapshot?.data[index];
-
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image(
-                  fit: BoxFit.cover,
-                  image: CachedNetworkImageProvider(
-                    _bloc.fetchImageUrl(imagePath: imageUrl)
-                  ),
+          Stack(
+            children: <Widget>[
+              Image(
+                image: CachedNetworkImageProvider(
+                  _bloc.fetchImageUrl(imagePath: _route?.posterImage)
                 ),
-              );
-            },
+              ),
+              ListView.builder(
+                itemCount: snapshot?.data?.length,
+                itemBuilder: (context, index) {
+                  String imageUrl = snapshot?.data[index];
+
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image(
+                      fit: BoxFit.cover,
+                      image: CachedNetworkImageProvider(
+                        _bloc.fetchImageUrl(imagePath: imageUrl)
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
         );
       },

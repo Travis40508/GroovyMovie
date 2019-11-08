@@ -80,7 +80,9 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                     bottom: 10.0,
                     child: IconButton(
                       icon: Icon(Icons.image, color: Theme.of(context).primaryColor, size: 48.0,),
-                      onPressed: () => Navigator.of(context).pushNamed(MovieImagesRoute.routeName, arguments: MovieImagesRoute(images: snapshot?.data)),
+                      onPressed: () => Navigator.of(context).pushNamed(
+                          MovieImagesRoute.routeName,
+                          arguments: MovieImagesRoute(images: snapshot?.data, posterImage: _route?.movie?.posterPath)),
                     ),
                   ),
                 );
