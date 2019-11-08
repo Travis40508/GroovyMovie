@@ -16,8 +16,8 @@ class MovieDetailsBloc extends Bloc {
   final _similarMoviesSubject = PublishSubject<List<Movie>>();
   Observable<List<Movie>> get similarMoviesStream => _similarMoviesSubject.stream;
 
-  final _movieImagesSubject = PublishSubject<List<String>>();
-  Observable<List<String>> get movieImagesStream => _movieImagesSubject.stream;
+  final _movieImagesSubject = BehaviorSubject<List<String>>();
+  ValueObservable<List<String>> get movieImagesStream => _movieImagesSubject.stream;
 
   @override
   void dispose() {

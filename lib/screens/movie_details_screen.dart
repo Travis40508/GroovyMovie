@@ -70,6 +70,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
               ),
             ), StreamBuilder (
               stream: _bloc.movieImagesStream,
+              initialData: _bloc.movieImagesStream.value,
               builder: (context, AsyncSnapshot<List<String>> snapshot) {
                 return StreamHandler(
                   snapshot: snapshot,
