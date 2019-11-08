@@ -17,12 +17,12 @@ class StreamHandler extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (snapshot.hasError) {
-      return errorWidget;
-    }
-
     if (!snapshot.hasData) {
       return loadingWidget;
+    }
+
+    if (snapshot.hasError) {
+      return errorWidget;
     }
 
     if ((snapshot.data as List).length == 0) {

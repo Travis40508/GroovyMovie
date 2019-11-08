@@ -63,8 +63,11 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
       children: <Widget>[
         Stack(
           children: <Widget>[
-            Image(
-              image: CachedNetworkImageProvider(_bloc.getImagePath(path: _route?.movie?.backDropPath)),
+            Hero(
+              tag: _route?.movie?.backDropPath,
+              child: Image(
+                image: CachedNetworkImageProvider(_bloc.getImagePath(path: _route?.movie?.backDropPath)),
+              ),
             ), StreamBuilder (
               stream: _bloc.movieImagesStream,
               builder: (context, AsyncSnapshot<List<String>> snapshot) {

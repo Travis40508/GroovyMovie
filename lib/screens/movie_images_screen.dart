@@ -20,10 +20,14 @@ class _MovieImagesScreenState extends State<MovieImagesScreen> {
 
   @override
   void didChangeDependencies() {
-    _route = ModalRoute.of(context).settings.arguments;
-    _bloc = BlocProvider.of<MovieImagesBloc>(context);
 
-    _bloc.populateImages(images: _route?.images);
+    _route = ModalRoute.of(context).settings.arguments;
+
+    if (_bloc == null) {
+      _bloc = BlocProvider.of<MovieImagesBloc>(context);
+      _bloc.populateImages(images: _route?.images);
+    }
+
     super.didChangeDependencies();
   }
 
@@ -60,15 +64,20 @@ class _MovieImagesScreenState extends State<MovieImagesScreen> {
         return StreamHandler(
           snapshot: snapshot,
           errorWidget: MoviesErrorWidget(),
-          loadingWidget: MoviesLoadingWidget(),
-          successWidget: ListView.builder(
+          loadingWidget: Container(),
+          successWidget:
+          ListView.builder(
             itemCount: snapshot?.data?.length,
             itemBuilder: (context, index) {
               String imageUrl = snapshot?.data[index];
 
-              return Image(
-                image: CachedNetworkImageProvider(
-                  imageUrl
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image(
+                  fit: BoxFit.cover,
+                  image: CachedNetworkImageProvider(
+                    _bloc.fetchImageUrl(imagePath: imageUrl)
+                  ),
                 ),
               );
             },

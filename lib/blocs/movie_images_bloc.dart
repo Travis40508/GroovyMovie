@@ -3,6 +3,7 @@
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:groovy_movie/repository/movies_repository.dart';
 import 'package:groovy_movie/repository/movies_repository_impl.dart';
+import 'package:groovy_movie/utils/strings.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:flutter/foundation.dart';
 
@@ -24,6 +25,10 @@ class MovieImagesBloc extends Bloc {
 
 
   void populateImages({@required List<String> images}) {
-    _movieImagesSubject.sink.add(images);
+    Future.delayed(Duration(milliseconds: 500), () => _movieImagesSubject.sink.add(images));
+  }
+
+  String fetchImageUrl({@required String imagePath}) {
+    return '${Strings.baseMoviePath}$imagePath';
   }
 }
