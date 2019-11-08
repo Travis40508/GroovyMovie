@@ -81,11 +81,12 @@ class MoviesApplication extends StatelessWidget {
           caption: TextStyle(
             color: primaryColor,
             fontSize: 22.0,
+            fontStyle: FontStyle.italic,
           ),
           subtitle: TextStyle(
             color: primaryColor,
+            fontStyle: FontStyle.italic,
             fontSize: 16.0,
-            fontWeight: FontWeight.normal
           ),
           title: TextStyle(
               color: primaryColor,
