@@ -6,7 +6,6 @@ import 'package:groovy_movie/routes/movie_images_route.dart';
 import 'package:groovy_movie/routes/movie_screen_route.dart';
 import 'package:groovy_movie/utils/strings.dart';
 import 'package:groovy_movie/widgets/error_widget.dart';
-import 'package:groovy_movie/widgets/movies_loading_widget.dart';
 import 'package:groovy_movie/widgets/stream_handler.dart';
 
 class MovieImagesScreen extends StatefulWidget {
@@ -15,13 +14,11 @@ class MovieImagesScreen extends StatefulWidget {
 }
 
 class _MovieImagesScreenState extends State<MovieImagesScreen> {
-
   MovieImagesBloc _bloc;
   MovieImagesRoute _route;
 
   @override
   void didChangeDependencies() {
-
     _route = ModalRoute.of(context).settings.arguments;
 
     if (_bloc == null) {
@@ -53,7 +50,8 @@ class _MovieImagesScreenState extends State<MovieImagesScreen> {
       centerTitle: true,
       leading: IconButton(
         icon: Icon(Icons.home),
-        onPressed: () => Navigator.popUntil(context, ModalRoute.withName(MovieScreenRoute.routeName)),
+        onPressed: () => Navigator.popUntil(
+            context, ModalRoute.withName(MovieScreenRoute.routeName)),
       ),
     );
   }
@@ -66,31 +64,20 @@ class _MovieImagesScreenState extends State<MovieImagesScreen> {
           snapshot: snapshot,
           errorWidget: MoviesErrorWidget(),
           loadingWidget: Container(),
-          successWidget:
-          Stack(
-            children: <Widget>[
-              Image(
-                image: CachedNetworkImageProvider(
-                  _bloc.fetchImageUrl(imagePath: _route?.posterImage)
-                ),
-              ),
-              ListView.builder(
-                itemCount: snapshot?.data?.length,
-                itemBuilder: (context, index) {
-                  String imageUrl = snapshot?.data[index];
+          successWidget: ListView.builder(
+            itemCount: snapshot?.data?.length,
+            itemBuilder: (context, index) {
+              String imageUrl = snapshot?.data[index];
 
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image(
-                      fit: BoxFit.cover,
-                      image: CachedNetworkImageProvider(
-                        _bloc.fetchImageUrl(imagePath: imageUrl)
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ],
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image(
+                  fit: BoxFit.cover,
+                  image: CachedNetworkImageProvider(
+                      _bloc.fetchImageUrl(imagePath: imageUrl)),
+                ),
+              );
+            },
           ),
         );
       },
